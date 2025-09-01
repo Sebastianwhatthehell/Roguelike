@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController Instance;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float moveSpeed = 2f; // Not sure if I should state 2f or leave it blank cause you can set it up in inspector anyhow. So 2 is default now I guess
 
@@ -12,6 +13,13 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        if (Instance !=null && Instance != this){
+            Destroy(this);
+            } else {
+            Instance = this;
+            }
+            
+            
         // Get the current default input actions (from the PlayerInput component instead of old system)
         var playerInput = GetComponent<PlayerInput>();
         if (playerInput != null)
